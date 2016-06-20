@@ -1,0 +1,2 @@
+class GlobalNotFoundException(Exception):
+    pass
