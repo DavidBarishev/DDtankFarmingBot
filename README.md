@@ -6,7 +6,7 @@ The repository is designed to be extendable, it run 'Farming modules' that are i
 
 ## Dependencies 
 - [pyautogui] (https://github.com/DavidBarishev/DDtankFarmingBot/wiki/How-to-setup-the-project)
-- ~~OpenCV~~ not a dependency yet, but may be used in the future for faster image detection
+- ~~OpenCV~~ not a dependency yet, but may be used in the future for faster image detection  
 [Click here]() to go to the wiki setup page
 
 ## How to develop 'Farming Modules'?
