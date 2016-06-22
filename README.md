@@ -10,7 +10,7 @@ The repository is designed to be extendable, it run 'Farming modules' that are i
 [Click here]() to go to the wiki setup page
 
 ## How to develop 'Farming Modules'?
-Check out the wiki section for it [here] https://github.com/DavidBarishev/DDtankFarmingBot/wiki/How-to-create-a-'Farming-Module')
+Check out the wiki section for it [here] (https://github.com/DavidBarishev/DDtankFarmingBot/wiki/How-to-create-a-'Farming-Module')
 
 ## Road Map
 
