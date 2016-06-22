@@ -30,8 +30,16 @@ In the global package , there are modules that provide the framework for the 'Fa
 - ~~OpenCV~~ not a dependency yet , but maybe in the future for faster image detection
 
 ## How to develope 'Farming Modules'
+Check ou the wiki section for it [here](https://github.com/DavidBarishev/DDtankFarmingBot/wiki)
 
 ## Road Map
 
-## License
+  - [x] Basic logging
+  - [x] Basic Framwork
+  - [ ] Develope as much 'Farming Modules'
+  - [ ] Add combat farming - eg farming sports fights
+  - [ ] Add PVE farming - eg farming botyard
 
+
+## License
+This software is protected under the  **GNU GENERAL PUBLIC LICENSE Version 3** , read the license.txt for more information 
