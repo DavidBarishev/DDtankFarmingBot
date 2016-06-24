@@ -113,6 +113,10 @@ def main():
 
 
 if __name__ == '__main__':
+    if not os.path.exists('Logs'):
+        os.makedirs('Logs')
+    if not os.path.exists('Captures'):
+        os.makedirs('Captures')
     pass
     #time.sleep(5)
     #main()
