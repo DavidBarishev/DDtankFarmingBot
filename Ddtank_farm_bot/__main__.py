@@ -14,10 +14,10 @@ import Capture
 
 
 def locate_globals():
-    # F Gamplay
     """
         Located the global variables for later use
     """
+    # F Gamplay
     log.debug("Trying to find F Game Play Position")
 
     tmp_f = Imging.locate_in_game_screen('Images/Fun.png')
@@ -113,6 +113,7 @@ def main():
 
 
 if __name__ == '__main__':
-    time.sleep(5)
-    main()
+    pass
+    #time.sleep(5)
+    #main()
     #Capture.save_game_screen()
