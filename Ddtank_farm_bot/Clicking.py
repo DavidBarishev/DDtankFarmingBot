@@ -8,6 +8,7 @@ log = logging.getLogger(__name__)
 def click(x, y):
     """
     Clicks left click one time
+
     Args:
         x (int): x to click
         y (int): y to click
@@ -19,6 +20,7 @@ def click(x, y):
 def click_point(point):
     """
     Clicks left click one time
+
     Args:
         point (Tuple): (x,y) to click
     """
@@ -28,6 +30,7 @@ def click_point(point):
 def click_in_game_region(x, y):
     """
     Clicks in game region
+
     Args:
         x (int): x to click , relative to game region
         y (int): y to click , relative to game region
@@ -38,6 +41,7 @@ def click_in_game_region(x, y):
 def click_in_game_region_point(point):
     """
     Clicks in game region
+
     Args:
         point (Tuple): (x,y) to click in
     """

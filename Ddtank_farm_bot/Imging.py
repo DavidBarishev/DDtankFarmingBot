@@ -6,6 +6,7 @@ import Capture
 def locate(needle, haystack, locate_all=False, grayscale=False):
     """
     Locates one image in another
+
     Args:
         locate_all (Optional[bool]): Locate All ?
         needle (Image): The image to find
@@ -24,6 +25,7 @@ def locate(needle, haystack, locate_all=False, grayscale=False):
 def locate_on_screen(needle, locate_all=False, grayscale=False):
     """
     Locate image on the screen
+
     Args:
         needle (Image): The image to find
         grayscale (Optional[bool]): Use grayscale in matching
@@ -41,6 +43,7 @@ def locate_on_screen(needle, locate_all=False, grayscale=False):
 def locate_with_region(needle, region=Globals.GAME_REGION, locate_all=False, grayscale=False):
     """
     Locate image on the screen with a region
+
     Args:
         needle (Image): The image to find
         region (Tuple): (x, y, width, height) of the region to match in
@@ -56,6 +59,7 @@ def locate_with_region(needle, region=Globals.GAME_REGION, locate_all=False, gra
 def locate_in_game_screen(needle, locate_all=False, grayscale=False):
     """
     Continent wrapper to locate with region , locates an image in the game area
+
     Args:
         needle (Image): The image to find
         locate_all (Optional[bool]): Locate All ?

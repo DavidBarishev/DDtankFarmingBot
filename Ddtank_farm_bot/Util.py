@@ -21,8 +21,10 @@ def click_exit_button():
 def center(area):
     """
     Returns center of area
+
     Args:
         area (Tuple): (x,y,width,height) rectangle
+
     Returns:
         Tuple : Center of area
     """

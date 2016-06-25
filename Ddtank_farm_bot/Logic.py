@@ -23,6 +23,7 @@ class FarmAction(object):
     def is_available(self):
         """
         Can you execute the event
+
         Returns:
             bool: Can you execute the event
         """
