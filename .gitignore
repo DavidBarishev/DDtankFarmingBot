@@ -1,5 +1,7 @@
-.idea/*
 *.pyc
-Ddtank_farm_bot/Logs/*
-Ddtank_farm_bot/Captures/*
-Config.json
+.idea/
+Ddtank_farm_bot/Captures/
+Ddtank_farm_bot/Logs/
+Documentation/source/_static/
+Documentation/source/_templates/
+/Ddtank_farm_bot/Config.json
