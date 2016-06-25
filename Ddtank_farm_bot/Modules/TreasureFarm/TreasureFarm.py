@@ -9,11 +9,11 @@ from Logic import FarmAction
 
 EXPLORE_POS = (577, 542)
 RIGHT = (958, 534)
-FARM_POS = (680, 190)
+FARM_POS = (500, 190)
 TREASURE_POS = (34, 133)
 BACK_POS = (959, 566)
 PATH = 'Modules/TreasureFarm/Images/'
-TILES = [(492, 186),(579, 233),(428, 238)]
+TILES = [(492, 186), (579, 233), (428, 238)]
 
 
 class TreasureFarm(FarmAction):

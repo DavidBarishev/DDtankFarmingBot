@@ -149,6 +149,12 @@ def setup_logger():
     global log
     log = logging.getLogger(__name__)
 
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(levelname)-8s %(message)s')
+    console.setFormatter(formatter)
+
+    logging.getLogger('').addHandler(console)
 
 if __name__ == '__main__':
     setup_logger()
