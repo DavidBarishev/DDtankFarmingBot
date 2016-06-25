@@ -2,6 +2,7 @@ import logging
 import time
 import os
 from datetime import datetime
+import json
 
 from importlib import import_module
 
@@ -10,7 +11,6 @@ import Util
 import Imging
 import Logic
 import Exceptions
-import Capture
 
 
 def locate_globals():
@@ -47,28 +47,48 @@ def import_modules():
     Returns:
         List: List of all imported modules , instantiated
     """
+    config = get_configuration()
     modules = []
     for module_name in os.listdir('./Modules'):
 
         if '.py' in module_name:
             continue
+        if config[module_name] == 'False':
+            log.debug('Not importing %s, disabled in the config', module_name)
+            continue
 
         log.info('Importing module : %s', module_name)
-        print 'Importing module : %s' % module_name
         try:
-            if input('Import this ?'):
-                module_imported = import_module('Modules.' + module_name + '.' + module_name)
-                modules.append(getattr(module_imported, module_name)())
+            module_imported = import_module('Modules.' + module_name + '.' + module_name)
+            modules.append(getattr(module_imported, module_name)())
         except ImportError:
             log.error('Module %s cannot be imported, check the docs for the proper format', module_name)
         except TypeError:
             log.error('Module %s cannot be instantiated, check the docs for the proper format', module_name)
-    # TODO Remove this
-    '''
-    ---------------------------------------------------------------
-    '''
-    time.sleep(3)
     return modules
+
+
+def get_configuration():
+    log.debug('Loading Configuration')
+    if not os.path.exists('Config.json'):
+        log.info('Config file not found - creating one')
+        config = {}
+
+        for module_name in os.listdir('./Modules'):
+            if '.py' in module_name:
+                continue
+            else:
+                config[module_name] = 'True'
+
+        with open('Config.json', 'w') as outputfile:
+            json.dump(config, outputfile, sort_keys=True, indent=4, ensure_ascii=False)
+
+        return json.dumps(config)
+
+    else:
+        with open('Config.json') as data_file:
+            config = json.load(data_file)
+            return config
 
 
 def run_modules(modules):
@@ -90,16 +110,7 @@ def run_modules(modules):
                 module.run()
 
 
-def main():
-    logging.basicConfig(filename='./Logs/'+datetime.now().strftime('%Y-%m-%d %H-%M-%S')+'.log',
-                        filemode='w',
-                        format='%(asctime)s,%(msecs)d - %(name)s.%(funcName)s() - %(levelname)s - %(message)s',
-                        datefmt='%H:%M:%S',
-                        level=logging.DEBUG)
-
-    global log
-    log = logging.getLogger(__name__)
-
+def run_bot():
     log.info("Starting The Program")
 
     log.info("Locating Globals")
@@ -112,12 +123,35 @@ def main():
         log.critical("Could not locate one of the globals , exiting")
 
 
-if __name__ == '__main__':
+def make_directories():
+    log.debug('Checking if Logs folder exists')
     if not os.path.exists('Logs'):
+        log.debug('Log folder doesnt exists , making it')
         os.makedirs('Logs')
+    else:
+        log.debug('Log folder exists')
+
+    log.debug('Checking if Captures folder exists')
     if not os.path.exists('Captures'):
+        log.debug('Log Captures doesnt exists , making it')
         os.makedirs('Captures')
-    pass
-    #time.sleep(5)
-    #main()
-    #Capture.save_game_screen()
+    else:
+        log.debug('Captures folder exists')
+
+
+def setup_logger():
+    logging.basicConfig(filename='./Logs/' + datetime.now().strftime('%Y-%m-%d %H-%M-%S') + '.log',
+                        filemode='w',
+                        format='%(asctime)s,%(msecs)d - %(name)s.%(funcName)s() - %(levelname)s - %(message)s',
+                        datefmt='%H:%M:%S',
+                        level=logging.DEBUG)
+
+    global log
+    log = logging.getLogger(__name__)
+
+
+if __name__ == '__main__':
+    setup_logger()
+    make_directories()
+    time.sleep(5)
+    run_bot()
