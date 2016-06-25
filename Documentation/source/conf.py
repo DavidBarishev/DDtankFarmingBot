@@ -18,7 +18,7 @@
 #
 import os
 import sys
-sys.path.insert(0, 'D:\\Coding projects\\PyCharm Projects\\Test')
+sys.path.insert(0, "\\".join(os.path.abspath('.').split(os.sep)[:-2:]))
 
 # -- General configuration ------------------------------------------------
 
