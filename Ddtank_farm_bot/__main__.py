@@ -149,6 +149,7 @@ def setup_logger():
     global log
     log = logging.getLogger(__name__)
 
+    # Add logging above info to console
     console = logging.StreamHandler()
     console.setLevel(logging.INFO)
     formatter = logging.Formatter('%(levelname)-8s %(message)s')
