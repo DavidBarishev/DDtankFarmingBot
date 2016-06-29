@@ -6,11 +6,11 @@ import json
 
 from importlib import import_module
 
-import Globals
-import Util
-import Imging
-import Logic
-import Exceptions
+from Framework import Globals
+from Framework import Util
+from Framework import Imging
+from Framework import Logic
+from Framework import Exceptions
 
 
 def locate_globals():
@@ -115,7 +115,7 @@ def run_bot():
 
     log.info("Locating Globals")
     try:
-        locate_globals()
+        #locate_globals()
         run_modules(import_modules())
 
         log.info('Done')
@@ -124,20 +124,35 @@ def run_bot():
 
 
 def make_directories():
-    log.debug('Checking if Logs folder exists')
+    #if 'log' in globals():
+    print 'Checking if Logs folder exists'
     if not os.path.exists('Logs'):
-        log.debug('Log folder doesnt exists , making it')
+        print 'Log folder doesnt exists , making it'
         os.makedirs('Logs')
     else:
-        log.debug('Log folder exists')
+        print 'Log folder exists'
 
-    log.debug('Checking if Captures folder exists')
+    print 'Checking if Captures folder exists'
     if not os.path.exists('Captures'):
-        log.debug('Log Captures doesnt exists , making it')
+        print 'Log Captures doesnt exists , making it'
         os.makedirs('Captures')
     else:
-        log.debug('Captures folder exists')
+        print 'Captures folder exists'
+    """else:
+        log.debug('Checking if Logs folder exists')
+        if not os.path.exists('Logs'):
+            log.debug('Log folder doesnt exists , making it')
+            os.makedirs('Logs')
+        else:
+            log.debug('Log folder exists')
 
+        log.debug('Checking if Captures folder exists')
+        if not os.path.exists('Captures'):
+            log.debug('Log Captures doesnt exists , making it')
+            os.makedirs('Captures')
+        else:
+            log.debug('Captures folder exists')
+    """
 
 def setup_logger():
     logging.basicConfig(filename='./Logs/' + datetime.now().strftime('%Y-%m-%d %H-%M-%S') + '.log',
@@ -158,7 +173,7 @@ def setup_logger():
     logging.getLogger('').addHandler(console)
 
 if __name__ == '__main__':
-    setup_logger()
     make_directories()
+    setup_logger()
     time.sleep(5)
     run_bot()
