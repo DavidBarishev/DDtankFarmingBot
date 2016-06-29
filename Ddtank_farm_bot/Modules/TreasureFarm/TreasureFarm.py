@@ -1,10 +1,8 @@
 import logging
 from time import sleep
 
-import Util
-from Ddtank_farm_bot import Imging
-import Clicking
-from Logic import FarmAction
+from Framework import Util, Imging, Clicking
+from Framework.Logic import FarmAction
 
 
 EXPLORE_POS = (577, 542)

@@ -1,10 +1,8 @@
 import logging
 from time import sleep
 
-from Logic import FarmAction
-import Util
-import Clicking
-import Imging
+from Framework import Util, Imging, Clicking
+from Framework.Logic import FarmAction
 
 TREASURE_MAP_POS = (812, 566)
 THROW_POS = (763, 561)

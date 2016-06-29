@@ -1,4 +1,4 @@
-import Globals
+from Framework import Globals
 import pyautogui
 import logging
 

@@ -1,7 +1,9 @@
-import Imging
 import logging
-import Clicking
-import Globals
+
+from Framework import Imging
+from Framework import Clicking
+from Framework import Globals
+
 
 log = logging.getLogger(__name__)
 

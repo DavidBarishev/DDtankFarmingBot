@@ -1,9 +1,8 @@
-import Clicking
-from Logic import FarmAction
 import logging
 import time
-import Imging
-import Util
+
+from Framework import Util, Imging, Clicking
+from Framework.Logic import FarmAction
 
 PATH = 'Modules/WealthTree/Images/'
 MAGIC_FRUIT = (352, 204)

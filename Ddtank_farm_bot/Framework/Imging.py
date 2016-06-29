@@ -1,5 +1,5 @@
 import pyautogui
-import Globals
+from Framework import Globals
 import Capture
 
 
