@@ -1,5 +1,7 @@
 import logging
 
+import pyautogui
+
 from Framework import Imging
 from Framework import Clicking
 from Framework import Globals
@@ -61,3 +63,7 @@ def get_module_name(str_o):
             .replace('>', '')\
             .replace(' ', '.')\
             .split('.')[1]
+
+
+def move_mouse_out_of_game_screen():
+    pyautogui.moveTo(Globals.X_GAME - 10, Globals.Y_GAME - 10)

@@ -1,4 +1,5 @@
 from Framework import Globals
+import Util
 import pyautogui
 import logging
 
@@ -15,6 +16,7 @@ def click(x, y):
     """
     log.debug("Clicking at (%d,%d)", x, y)
     pyautogui.click(x, y)
+    Util.move_mouse_out_of_game_screen()
 
 
 def click_point(point):

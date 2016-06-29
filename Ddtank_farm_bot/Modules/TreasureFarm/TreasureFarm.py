@@ -17,66 +17,45 @@ TILES = [(492, 186), (579, 233), (428, 238)]
 class TreasureFarm(FarmAction):
     def __init__(self):
         self.log = logging.getLogger(__name__)
+        self.stars = None
 
     def is_available(self):
-        return True
-        walk_to_farm(self.log)
-
-        self.log.debug('Checking amount of times left to seek treasure ')
-        is_left = Imging.locate_in_game_screen(PATH + 'Explore.png')
-        self.log.debug('Treasure available to seek : %s', is_left is not None)
-        sleep(1)
-
-        exit_farm(self.log)
-
-        return is_left is not None
-
-    def run(self):
-
-        walk_to_farm(self.log)
-
         self.log.debug('Checking amount of times left to seek treasure ')
         stars = Imging.locate_in_game_screen(PATH + 'Smiley.png', locate_all=True)
         stars = list(stars)
         self.log.info('Treasure available to seek : %d times', len(stars))
+        self.stars = stars
 
+        return len(self.stars) > 0
+
+    def run(self):
         self.log.debug('Staring exploring')
         Clicking.click_in_game_region_point(EXPLORE_POS)
-        sleep(3)
+        sleep(7)
 
-        for i, star in enumerate(stars):
+        for i, star in enumerate(self.stars):
             self.log.info('Exploring Tile')
             Clicking.click_in_game_region_point(TILES[i])
-            sleep(5.5)
+            sleep(10)
 
-        exit_farm(self.log)
-
-
-def walk_to_farm(log):
-    # Get to the farm
-        log.debug('Moving Right')
+    def get_to_event(self):
+        self.log.debug('Moving Right')
         for i in xrange(3):
             Clicking.click_in_game_region_point(RIGHT)
-            sleep(3)
+            sleep(5)
 
-        log.debug('Entering Farm')
+        self.log.debug('Entering Farm')
         Clicking.click_in_game_region_point(FARM_POS)
-        sleep(3)
+        sleep(7)
 
-        log.debug('Entering farm treasure')
+        self.log.debug('Entering farm treasure')
         Clicking.click_in_game_region_point(TREASURE_POS)
-        sleep(3)
+        sleep(7)
 
+    def exit_event(self):
+        Util.click_back_button()
+        sleep(7)
 
-def exit_farm(log):
-    log.debug('Exiting')
-    Util.click_back_button()
-    sleep(2)
-
-    log.debug('Clicking door')
-    Clicking.click_in_game_region_point(BACK_POS)
-    sleep(2)
-
-if __name__ == '__main__':
-    sleep(5)
-    TreasureFarm().is_available()
+        self.log.debug('Clicking door')
+        Clicking.click_in_game_region_point(BACK_POS)
+        sleep(7)

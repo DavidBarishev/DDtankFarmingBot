@@ -28,3 +28,17 @@ class FarmAction(object):
             bool: Can you execute the event
         """
         pass
+
+    @abstractmethod
+    def get_to_event(self):
+        """
+        Get in game to the event screen
+        """
+        pass
+
+    @abstractmethod
+    def exit_event(self):
+        """
+        Exists the event , back to main yard
+        """
+        pass

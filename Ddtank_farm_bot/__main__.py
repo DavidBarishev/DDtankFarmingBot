@@ -103,11 +103,16 @@ def run_modules(modules):
         if not isinstance(module, Logic.FarmAction):
             log.error('%s is not FarmAction instance, check the docs for the proper format', module_name)
         else:
+            log.debug('Going to event - %s ', module_name)
+            module.get_to_event()
+
             log.info('Checking availability - %s', module_name)
             if module.is_available():
                 log.info('%s is available , executing', module_name)
                 time.sleep(1)
                 module.run()
+            log.debug('Existing Event - %s ', module_name)
+            module.exit_event()
 
 
 def run_bot():
@@ -115,7 +120,7 @@ def run_bot():
 
     log.info("Locating Globals")
     try:
-        #locate_globals()
+        locate_globals()
         run_modules(import_modules())
 
         log.info('Done')
