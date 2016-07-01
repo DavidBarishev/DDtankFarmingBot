@@ -20,7 +20,7 @@ def locate_globals():
     # F Gamplay
     log.debug("Trying to find F Game Play Position")
 
-    tmp_f = Imging.locate_in_game_screen('Images/Fun.png')
+    tmp_f = Imging.locate_in_game_screen(Util.image_path('Fun'))
 
     if tmp_f is None:
         log.critical("Could not find F Gameplay")
@@ -31,7 +31,7 @@ def locate_globals():
         log.debug("Located F Gameplay at : %s", str(Globals.f_gameplay_pos))
 
     # Event
-    tmp_e = Imging.locate_in_game_screen('Images/Event.png')
+    tmp_e = Imging.locate_in_game_screen(Util.image_path('Event'))
 
     if tmp_e is None:
         log.critical("Could not find Event")
@@ -111,6 +111,7 @@ def run_modules(modules):
                 log.info('%s is available , executing', module_name)
                 time.sleep(1)
                 module.run()
+
             log.debug('Existing Event - %s ', module_name)
             module.exit_event()
 
@@ -159,10 +160,11 @@ def make_directories():
             log.debug('Captures folder exists')
     """
 
+
 def setup_logger():
     logging.basicConfig(filename='./Logs/' + datetime.now().strftime('%Y-%m-%d %H-%M-%S') + '.log',
                         filemode='w',
-                        format='%(asctime)s,%(msecs)d - %(name)s.%(funcName)s() - %(levelname)s - %(message)s',
+                        format='%(asctime)s,%(msecs)d | %(name)s.%(funcName)s() | %(levelname)s | %(message)s',
                         datefmt='%H:%M:%S',
                         level=logging.DEBUG)
 
@@ -172,7 +174,7 @@ def setup_logger():
     # Add logging above info to console
     console = logging.StreamHandler()
     console.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(levelname)-8s %(message)s')
+    formatter = logging.Formatter('%(levelname)-8s | %(message)s')
     console.setFormatter(formatter)
 
     logging.getLogger('').addHandler(console)
@@ -182,3 +184,4 @@ if __name__ == '__main__':
     setup_logger()
     time.sleep(5)
     run_bot()
+
