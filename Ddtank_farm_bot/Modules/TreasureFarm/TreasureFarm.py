@@ -22,7 +22,6 @@ class TreasureFarm(FarmAction):
     def is_available(self):
         self.log.debug('Checking amount of times left to seek treasure ')
         stars = Imging.locate_in_game_screen(PATH + 'Smiley.png', locate_all=True)
-        stars = list(stars)
         self.log.info('Treasure available to seek : %d times', len(stars))
         self.stars = stars
 

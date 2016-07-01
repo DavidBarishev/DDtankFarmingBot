@@ -50,6 +50,5 @@ def click_in_game_region_point(point):
     click_in_game_region(point[0], point[1])
 
 
-
-
-
+def move(x, y, duration=0.0):
+    pyautogui.moveTo(x=x, y=y, duration=duration)

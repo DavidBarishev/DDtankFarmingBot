@@ -17,7 +17,7 @@ def locate(needle, haystack, locate_all=False, grayscale=False):
         Tuple: if found (x, y, width, height) of matching region , otherwise None
     """
     if locate_all:
-        return pyautogui.locateAll(needle, haystack, grayscale=grayscale)
+        return list(pyautogui.locateAll(needle, haystack, grayscale=grayscale))
     else:
         return pyautogui.locate(needle, haystack, grayscale=grayscale)
 

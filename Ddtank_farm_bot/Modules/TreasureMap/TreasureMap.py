@@ -37,6 +37,7 @@ class TreasureMap(FarmAction):
         sleep(6)
         pass
 
+
     def exit_event(self):
         Util.click_back_button()
         sleep(1)
