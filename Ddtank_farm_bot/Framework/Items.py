@@ -28,6 +28,19 @@ def locate(img_file):
 
 def run_function_on_item(item_img, function, index_of_function, section=Inventory.InventorySections.Items):
     Inventory.go_to_inventory(section)
+    sleep(1)
+
+    run_function(
+        item_img=item_img,
+        function=function,
+        index_of_function=index_of_function
+    )
+
+    Inventory.exit_inventory()
+    sleep(1)
+
+
+def run_function(item_img, function, index_of_function):
     pos = locate(item_img)
     if pos is None:
         return
@@ -37,7 +50,7 @@ def run_function_on_item(item_img, function, index_of_function, section=Inventor
     sleep(5)
 
     if function == ItemFunctions.Batch_Empty_Preferred:
-        if Imging.locate_with_region(Util.image_path('Batch'), region=(982, 342, 407, 389)) is not None:
+        if Imging.locate_with_region(Util.image_path_main('Batch'), region=(982, 342, 407, 389)) is not None:
             function = ItemFunctions.Batch_Accept
             index_of_function = 2
         else:
@@ -58,6 +71,24 @@ def run_function_on_item(item_img, function, index_of_function, section=Inventor
         Clicking.click_in_game_region_point((502, 449))  # Submit
 
     # TODO add support when no inventory place left
+    sleep(2)
+
+
+def run_function_on_multiple_items(items):
+    current_section = items[0]['section']
+    Inventory.go_to_inventory(current_section)
+    for item in items:
+        if item['section'] != current_section:
+            current_section = items['section']
+            Inventory.go_to_section(current_section)
+
+        run_function(
+            item_img=item['item_img'],
+            function=item['function'],
+            index_of_function=items['index_of_function']
+        )
+    Inventory.exit_inventory()
+    sleep(1)
 
 
 def click_on_function(pos, index):

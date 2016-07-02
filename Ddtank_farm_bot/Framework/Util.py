@@ -18,5 +18,9 @@ def get_module_name(str_o):
         .split('.')[1]
 
 
-def image_path(img_name):
+def image_path_main(img_name):
     return 'Images/' + img_name + '.png'
+
+
+def image_path_module(img_name, module_name):
+    return 'Modules/' + module_name + '/Images/' + img_name + '.png'

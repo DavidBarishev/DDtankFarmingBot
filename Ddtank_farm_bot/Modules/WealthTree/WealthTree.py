@@ -1,10 +1,10 @@
 import logging
 import time
 
-from Framework import Util, Imging, Clicking
+from Framework import Util, Imging, Clicking, Items, UI
 from Framework.Logic import FarmAction
 
-PATH = 'Modules/WealthTree/Images/'
+MODULE_NAME = 'WealthTree'
 MAGIC_FRUIT = (352, 204)
 WEALTH_FRUIT = (296, 257)
 HEALTH_FRUIT = (391, 306)
@@ -19,7 +19,7 @@ class WealthTree(FarmAction):
     def is_available(self):
         # Wealth Tree
         self.log.debug("Trying to find Wealth Tree Position")
-        self.wealth_tree_pos = Imging.locate_in_game_screen(PATH + 'Tree.png')
+        self.wealth_tree_pos = Imging.locate_in_game_screen(Util.image_path_module('Tree',MODULE_NAME))
 
         if self.wealth_tree_pos is None:
             self.log.info("Couldn't find wealth tree event , considering it as not live")
@@ -33,6 +33,7 @@ class WealthTree(FarmAction):
         return True
 
     def run(self):
+        return
         self.log.debug("Clicking on Magic Fruit")
         Clicking.click_in_game_region_point(MAGIC_FRUIT)
         time.sleep(1)
@@ -49,13 +50,19 @@ class WealthTree(FarmAction):
         Clicking.click_in_game_region_point(LUCKY_FRUIT)
         time.sleep(2)
 
-        # TODO Open the fruits
-
     def get_to_event(self):
         self.log.debug("Clicking on F Gameplay")
-        Util.click_f_gamplay()
+        UI.click_f_gamplay()
         time.sleep(1)
 
     def exit_event(self):
-        Util.click_exit_button()
+        UI.click_exit_button()
         time.sleep(3)
+
+    def after_run(self):
+        Items.run_function_on_item(
+            item_img=Util.image_path_module('LuckyFruit', MODULE_NAME),
+            function=Items.ItemFunctions.Batch_Empty_Preferred,
+            index_of_function=-1,
+        )
+

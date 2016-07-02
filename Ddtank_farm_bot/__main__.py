@@ -1,16 +1,14 @@
-import logging
-import time
-import os
-from datetime import datetime
 import json
-
+import logging
+import os
+import time
+from datetime import datetime
 from importlib import import_module
 
-from Framework import Globals
-from Framework import Util
-from Framework import Imging
-from Framework import Logic
 from Framework import Exceptions
+from Framework import Globals
+from Framework import Imging
+from Framework import Util
 
 
 def locate_globals():
@@ -20,7 +18,7 @@ def locate_globals():
     # F Gamplay
     log.debug("Trying to find F Game Play Position")
 
-    tmp_f = Imging.locate_in_game_screen(Util.image_path('Fun'))
+    tmp_f = Imging.locate_in_game_screen(Util.image_path_main('Fun'))
 
     if tmp_f is None:
         log.critical("Could not find F Gameplay")
@@ -31,7 +29,7 @@ def locate_globals():
         log.debug("Located F Gameplay at : %s", str(Globals.f_gameplay_pos))
 
     # Event
-    tmp_e = Imging.locate_in_game_screen(Util.image_path('Event'))
+    tmp_e = Imging.locate_in_game_screen(Util.image_path_main('Event'))
 
     if tmp_e is None:
         log.critical("Could not find Event")
@@ -100,7 +98,8 @@ def run_modules(modules):
     """
     for module in modules:
         module_name = Util.get_module_name(str(module))
-        if not isinstance(module, Logic.FarmAction):
+        # TODO change back to farm action
+        if not isinstance(module, object):
             log.error('%s is not FarmAction instance, check the docs for the proper format', module_name)
         else:
             log.debug('Going to event - %s ', module_name)
@@ -114,6 +113,10 @@ def run_modules(modules):
 
             log.debug('Existing Event - %s ', module_name)
             module.exit_event()
+
+            log.debug('After run Event - %s ', module_name)
+            time.sleep(2)
+            module.after_run()
 
 
 def run_bot():

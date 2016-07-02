@@ -43,6 +43,9 @@ class FarmAction(object):
         """
         pass
 
-
-
-
+    @abstractmethod
+    def after_run(self):
+        """
+        Runs it after exit_event
+        """
+        pass
