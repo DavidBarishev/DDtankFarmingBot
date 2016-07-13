@@ -2,7 +2,6 @@ from time import sleep
 
 from Framework import Clicking
 
-
 class InventorySections(object):
     Equipment = 0
     Items = 1

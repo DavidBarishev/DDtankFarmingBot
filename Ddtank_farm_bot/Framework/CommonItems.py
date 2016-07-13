@@ -1,14 +1,22 @@
-import Items
+from Framework import Items,Inventory
 from Util import image_path_main
 
 
-def exp_1():
+def run_exp_1():
     Items.run_function_on_item(
         item_img=image_path_main('EXP_1'),
         function=Items.ItemFunctions.Open_Empty,
         index_of_function=1,
     )
 
+
+exp_1 = {
+        "item_img" : image_path_main('EXP_1'),
+        "function" : Items.ItemFunctions.Open_Empty,
+        "index_of_function" : 1,
+        "section" : Inventory.InventorySections.Items
+    }
+    
 
 def exp_2():
     Items.run_function_on_item(

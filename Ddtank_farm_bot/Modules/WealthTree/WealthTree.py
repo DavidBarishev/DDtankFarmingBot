@@ -23,7 +23,7 @@ class WealthTree(FarmAction):
 
         if self.wealth_tree_pos is None:
             self.log.info("Couldn't find wealth tree event , considering it as not live")
-            Util.reset_menus()
+            UI.reset_menus()
             return False
         else:
             self.log.debug("Found Wealth Tree at : %s", str(self.wealth_tree_pos))
@@ -33,7 +33,6 @@ class WealthTree(FarmAction):
         return True
 
     def run(self):
-        return
         self.log.debug("Clicking on Magic Fruit")
         Clicking.click_in_game_region_point(MAGIC_FRUIT)
         time.sleep(1)

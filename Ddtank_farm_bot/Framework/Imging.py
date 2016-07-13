@@ -1,7 +1,5 @@
 import pyautogui
-from Framework import Globals
-import Capture
-
+from Framework import Capture , Globals
 
 def locate(needle, haystack, locate_all=False, grayscale=False):
     """
@@ -40,7 +38,7 @@ def locate_on_screen(needle, locate_all=False, grayscale=False):
         return pyautogui.locateOnScreen(needle, grayscale=grayscale)
 
 
-def locate_with_region(needle, region=Globals.GAME_REGION, locate_all=False, grayscale=False):
+def locate_with_region(needle, region, locate_all=False, grayscale=False):
     """
     Locate image on the screen with a region
 
@@ -68,5 +66,5 @@ def locate_in_game_screen(needle, locate_all=False, grayscale=False):
         Tuple: if found (x, y, width, height) of matching region , otherwise None
 
     """
-    return locate_with_region(needle=needle, locate_all=locate_all, grayscale=grayscale)
+    return locate_with_region(needle=needle,region=Globals.GAME_REGION, locate_all=locate_all, grayscale=grayscale)
 

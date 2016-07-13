@@ -4,7 +4,6 @@ import logging
 
 log = logging.getLogger(__name__)
 
-
 def click(x, y):
     """
     Clicks left click one time

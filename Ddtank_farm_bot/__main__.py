@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import time
+
 from datetime import datetime
 from importlib import import_module
 
@@ -11,14 +12,22 @@ from Framework import Imging
 from Framework import Util
 
 
-def locate_globals():
+from Framework import Items, CommonItems
+
+def locate_globals(config):
     """
         Located the global variables for later use
     """
+
+    Globals.X_GAME = config['Screen']['GamePoint'][0]
+    Globals.Y_GAME = config['Screen']['GamePoint'][1]
+
+    Globals.GAME_REGION = (Globals.X_GAME,Globals.Y_GAME,Globals.GAME_WIDTH,Globals.GAME_HEIGHT)
+
     # F Gamplay
     log.debug("Trying to find F Game Play Position")
 
-    tmp_f = Imging.locate_in_game_screen(Util.image_path_main('Fun'))
+    tmp_f = Imging.locate_in_game_screen('Images/Fun.png')
 
     if tmp_f is None:
         log.critical("Could not find F Gameplay")
@@ -29,29 +38,28 @@ def locate_globals():
         log.debug("Located F Gameplay at : %s", str(Globals.f_gameplay_pos))
 
     # Event
-    tmp_e = Imging.locate_in_game_screen(Util.image_path_main('Event'))
+    tmp_e = Imging.locate_in_game_screen('Images/Event.png')
 
     if tmp_e is None:
         log.critical("Could not find Event")
         raise Exceptions.GlobalNotFoundException
     else:
         Globals.event_pos = Util.center(tmp_e)
-        log.debug("Located Event at : %s", Globals.event_pos)
+        log.debug("Located Event at : %s", Globals.event_pos)   
 
 
-def import_modules():
+def import_modules(config):
     """
     Imports all the modules dynamicly from /Modules and checks form.
     Returns:
         List: List of all imported modules , instantiated
     """
-    config = get_configuration()
     modules = []
     for module_name in os.listdir('./Modules'):
 
         if '.py' in module_name:
             continue
-        if config[module_name] == 'False':
+        if config['Modules'][module_name] == 'False':
             log.debug('Not importing %s, disabled in the config', module_name)
             continue
 
@@ -78,10 +86,32 @@ def get_configuration():
             else:
                 config[module_name] = 'True'
 
-        with open('Config.json', 'w') as outputfile:
-            json.dump(config, outputfile, sort_keys=True, indent=4, ensure_ascii=False)
+        # Game pos
+        pos = None
+        i = 0
+        while pos is None and i < 4:
+            log.info('Couldnt find game screen , retrying... ')
+            pos = Imging.locate_on_screen(Util.image_path_main('LockChat'))
+            i+= 1
 
-        return json.dumps(config)
+        if pos is None:
+            log.critical('Couldnt find game screen , exiting')
+            raise Exceptions.GlobalNotFoundException
+   
+        game_point_pos = (pos[0] - 16,pos[1] - 453) 
+
+        json_f = {
+            "Modules":config,
+            "Screen":
+            {
+                "GamePoint":game_point_pos,
+            }
+        }
+
+        with open('Config.json', 'w') as outputfile:
+            json.dump(json_f, outputfile, sort_keys=True, indent=4, ensure_ascii=False)
+
+        return json_f
 
     else:
         with open('Config.json') as data_file:
@@ -124,8 +154,16 @@ def run_bot():
 
     log.info("Locating Globals")
     try:
-        locate_globals()
-        run_modules(import_modules())
+        config = get_configuration()
+        locate_globals(config)
+        run_modules(import_modules(config))
+
+        exp1 = CommonItems.exp_1
+        Items.run_function_on_multiple_items(
+            [CommonItems.exp_1,CommonItems.exp_1,CommonItems.exp_1]
+        )
+
+
 
         log.info('Done')
     except Exceptions.GlobalNotFoundException:
@@ -133,38 +171,15 @@ def run_bot():
 
 
 def make_directories():
-    #if 'log' in globals():
-    print 'Checking if Logs folder exists'
     if not os.path.exists('Logs'):
-        print 'Log folder doesnt exists , making it'
         os.makedirs('Logs')
-    else:
-        print 'Log folder exists'
 
-    print 'Checking if Captures folder exists'
     if not os.path.exists('Captures'):
-        print 'Log Captures doesnt exists , making it'
         os.makedirs('Captures')
-    else:
-        print 'Captures folder exists'
-    """else:
-        log.debug('Checking if Logs folder exists')
-        if not os.path.exists('Logs'):
-            log.debug('Log folder doesnt exists , making it')
-            os.makedirs('Logs')
-        else:
-            log.debug('Log folder exists')
-
-        log.debug('Checking if Captures folder exists')
-        if not os.path.exists('Captures'):
-            log.debug('Log Captures doesnt exists , making it')
-            os.makedirs('Captures')
-        else:
-            log.debug('Captures folder exists')
-    """
 
 
 def setup_logger():
+    # File
     logging.basicConfig(filename='./Logs/' + datetime.now().strftime('%Y-%m-%d %H-%M-%S') + '.log',
                         filemode='w',
                         format='%(asctime)s,%(msecs)d | %(name)s.%(funcName)s() | %(levelname)s | %(message)s',

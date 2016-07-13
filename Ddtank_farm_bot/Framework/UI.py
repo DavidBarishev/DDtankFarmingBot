@@ -4,8 +4,8 @@ import pyautogui
 
 from Framework import Imging, Util
 from Framework import Globals
-log = logging.getLogger(__name__)
 
+log = logging.getLogger(__name__)
 
 def click_exit_button():
     from Framework import Clicking
