@@ -85,6 +85,7 @@ def run_function_on_multiple_items(items):
         run_function(
             item_img=item['item_img'],
             function=item['function'],
+            index_of_function=item['index_of_function']
         )
     Inventory.exit_inventory()
     sleep(1)

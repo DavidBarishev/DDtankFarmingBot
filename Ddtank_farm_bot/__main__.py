@@ -157,14 +157,7 @@ def run_bot():
         config = get_configuration()
         locate_globals(config)
         run_modules(import_modules(config))
-
-        exp1 = CommonItems.exp_1
-        Items.run_function_on_multiple_items(
-            [CommonItems.exp_1,CommonItems.exp_1,CommonItems.exp_1]
-        )
-
-
-
+        
         log.info('Done')
     except Exceptions.GlobalNotFoundException:
         log.critical("Could not locate one of the globals , exiting")
