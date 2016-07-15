@@ -1,9 +1,9 @@
 import logging
 from time import sleep
 
-from Framework import Util, Imging, Clicking
+"""from Framework import Util, Imging, Clicking
 from Framework.Logic import FarmAction
-
+"""
 
 EXPLORE_POS = (577, 542)
 RIGHT = (958, 534)

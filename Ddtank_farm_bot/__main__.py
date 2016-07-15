@@ -12,8 +12,6 @@ from Framework import Imging
 from Framework import Util
 
 
-from Framework import Items, CommonItems
-
 def locate_globals(config):
     """
         Located the global variables for later use
@@ -22,7 +20,8 @@ def locate_globals(config):
     Globals.X_GAME = config['Screen']['GamePoint'][0]
     Globals.Y_GAME = config['Screen']['GamePoint'][1]
 
-    Globals.GAME_REGION = (Globals.X_GAME,Globals.Y_GAME,Globals.GAME_WIDTH,Globals.GAME_HEIGHT)
+    Globals.GAME_REGION = (Globals.X_GAME, Globals.Y_GAME,
+                           Globals.GAME_WIDTH, Globals.GAME_HEIGHT)
 
     # F Gamplay
     log.debug("Trying to find F Game Play Position")
@@ -45,7 +44,7 @@ def locate_globals(config):
         raise Exceptions.GlobalNotFoundException
     else:
         Globals.event_pos = Util.center(tmp_e)
-        log.debug("Located Event at : %s", Globals.event_pos)   
+        log.debug("Located Event at : %s", Globals.event_pos)
 
 
 def import_modules(config):
@@ -65,7 +64,8 @@ def import_modules(config):
 
         log.info('Importing module : %s', module_name)
         try:
-            module_imported = import_module('Modules.' + module_name + '.' + module_name)
+            module_imported = import_module(
+                'Modules.' + module_name + '.' + module_name)
             modules.append(getattr(module_imported, module_name)())
         except ImportError:
             log.error('Module %s cannot be imported, check the docs for the proper format', module_name)
@@ -92,24 +92,25 @@ def get_configuration():
         while pos is None and i < 4:
             log.info('Couldnt find game screen , retrying... ')
             pos = Imging.locate_on_screen(Util.image_path_main('LockChat'))
-            i+= 1
+            i += 1
 
         if pos is None:
             log.critical('Couldnt find game screen , exiting')
             raise Exceptions.GlobalNotFoundException
-   
-        game_point_pos = (pos[0] - 16,pos[1] - 453) 
+
+        game_point_pos = (pos[0] - 16, pos[1] - 453)
 
         json_f = {
-            "Modules":config,
+            "Modules": config,
             "Screen":
             {
-                "GamePoint":game_point_pos,
+                "GamePoint": game_point_pos,
             }
         }
 
         with open('Config.json', 'w') as outputfile:
-            json.dump(json_f, outputfile, sort_keys=True, indent=4, ensure_ascii=False)
+            json.dump(json_f, outputfile, sort_keys=True,
+                      indent=4, ensure_ascii=False)
 
         return json_f
 
@@ -157,7 +158,7 @@ def run_bot():
         config = get_configuration()
         locate_globals(config)
         run_modules(import_modules(config))
-        
+
         log.info('Done')
     except Exceptions.GlobalNotFoundException:
         log.critical("Could not locate one of the globals , exiting")
@@ -173,11 +174,12 @@ def make_directories():
 
 def setup_logger():
     # File
-    logging.basicConfig(filename='./Logs/' + datetime.now().strftime('%Y-%m-%d %H-%M-%S') + '.log',
-                        filemode='w',
-                        format='%(asctime)s,%(msecs)d | %(name)s.%(funcName)s() | %(levelname)s | %(message)s',
-                        datefmt='%H:%M:%S',
-                        level=logging.DEBUG)
+    logging.basicConfig(
+        filename='./Logs/' + datetime.now().strftime('%Y-%m-%d %H-%M-%S') + '.log',
+        filemode='w',
+        format='%(asctime)s,%(msecs)d | %(name)s.%(funcName)s() | %(levelname)s | %(message)s',
+        datefmt='%H:%M:%S',
+        level=logging.DEBUG)
 
     global log
     log = logging.getLogger(__name__)
@@ -195,4 +197,3 @@ if __name__ == '__main__':
     setup_logger()
     time.sleep(5)
     run_bot()
-

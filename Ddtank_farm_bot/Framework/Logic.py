@@ -1,3 +1,5 @@
+"""Provides the abstract classes for the program """
+
 from abc import abstractmethod, ABCMeta
 
 

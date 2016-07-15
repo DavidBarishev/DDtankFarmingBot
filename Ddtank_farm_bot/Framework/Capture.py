@@ -1,5 +1,8 @@
+"""This modules is used to capture the screen
+"""
 import pyautogui
 import time
+
 from Framework import Globals
 
 PATH = './Captures/'

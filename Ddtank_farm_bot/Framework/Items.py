@@ -1,32 +1,57 @@
+"""Varise function used to interact with items"""
 from time import sleep
 
-from Framework import Clicking
-from Framework import Imging
-from Framework import Inventory
-from Framework import Util
-
+from Framework import Clicking, Imging, Inventory, Util
 
 class ItemFunctions(object):
+    """Function that can be used on items 
+    - Used like an enum
+
+    Attributes:
+        Batch_Accept (int): Batch open max, with rewards 
+        Batch_Empty (int): Batch open max, without rewards 
+        Batch_Empty_Preferred (int): Batch open max, without rewards , if amount is 1 , will do Open_Empty instead 
+        Open_Accept (int): Open 1 with rewards 
+        Open_Empty (int): Open 1 without rewards
+    """
     Open_Empty = 1
     Open_Accept = 2
     Batch_Empty = 3
     Batch_Accept = 4
     Batch_Empty_Preferred = 5
-    Move = 6
 
 
 def locate(img_file):
-        items = Imging.locate_with_region(img_file, region=(982, 342, 331, 321), locate_all=True)
-        if len(items) > 1:
-            Inventory.organize_inventory()
-            return Imging.locate_with_region(img_file, region=(982, 342, 331, 321), locate_all=False)
-        if len(items) > 0:
-            return items[0]
-        else:
-            return None
+    """locates item in inventory 
 
+    Args:
+        img_file (TYPE): Description
 
-def run_function_on_item(item_img, function, index_of_function, section=Inventory.InventorySections.Items):
+    Returns:
+        Tuple: Position of the item (x,y), None if not found
+    """
+    items = Imging.locate_with_region(
+        img_file, region=(982, 342, 331, 321), locate_all=True)
+    if len(items) > 1:
+        Inventory.organize_inventory()
+        return Util.center(Imging.locate_with_region(img_file, region=(982, 342, 331, 321), locate_all=False))
+    if len(items) > 0:
+        return Util.center(items[0])
+    else:
+        return None
+
+#Inventory.InventorySections.Items
+def run_function_on_item(item_img, function, index_of_function, section=0):
+    """Uses function on item
+
+    Args:
+        item_img (str): file name of item's image
+        function (ItemFunctions): function to execute 
+        index_of_function (int): index of function in the item's context menu
+        - When using batch_empty_prefered , leave it at -1
+        section (InventorySections, optional): Section of inventory the item is at
+
+    """
     Inventory.go_to_inventory(section)
     sleep(1)
 
@@ -41,11 +66,22 @@ def run_function_on_item(item_img, function, index_of_function, section=Inventor
 
 
 def run_function(item_img, function, index_of_function):
+    """Runs function on item 
+    - Inventory should be open
+    - Internal function, use run_function_on_item instead 
+
+    Args:
+        item_img (str): file name of item's image
+        function (ItemFunctions): function to execute 
+        index_of_function (int): index of function in the item's context menu
+        - When using batch_empty_prefered , leave it at -1
+
+    """
     pos = locate(item_img)
     if pos is None:
         return
     x, y = Util.center(pos)
-    x, y = x + 982, y+342
+    x, y = x + 982, y + 342
     Clicking.click(x, y)
     sleep(5)
 
@@ -75,6 +111,18 @@ def run_function(item_img, function, index_of_function):
 
 
 def run_function_on_multiple_items(items):
+    """Runs function per item , for multiple items 
+
+    Args:
+        items (dict): Item dict , that represent the item , and the function.
+        The proper form is :
+        {
+            "item_img": Path to image , (Use Util.image_path_main or Util.image_path_module),
+            "function": Items.ItemFunctions.* Function to execute,
+            "index_of_function": index of function in the context menu ,
+            "section": Inventory.InventorySections.* Section of the inventory the item is in
+        }
+    """
     current_section = items[0]['section']
     Inventory.go_to_inventory(current_section)
     for item in items:
@@ -92,7 +140,14 @@ def run_function_on_multiple_items(items):
 
 
 def click_on_function(pos, index):
+    """Clicks on function when the position of item is known 
+    - Internal function 
+    - The item should be clicked once 
+
+    Args:
+        pos (tuple): (x,y) the position of the item
+        index (int): the index of the function in the context menu
+
+    """
     Clicking.click(pos[0] + 47,
-                   pos[1] + (index * 30 + ((index - 1) * 30))/2)
-
-
+                   pos[1] + (index * 30 + ((index - 1) * 30)) / 2)

@@ -1,8 +1,11 @@
+"""This module is used to click on the screen"""
+
 from Framework import Globals, UI
 import pyautogui
 import logging
 
 log = logging.getLogger(__name__)
+
 
 def click(x, y):
     """

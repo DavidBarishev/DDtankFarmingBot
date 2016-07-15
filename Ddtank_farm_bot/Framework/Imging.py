@@ -1,3 +1,5 @@
+"""This module handles Imaging related function used to find images on screen"""
+
 import pyautogui
 from Framework import Capture , Globals
 
