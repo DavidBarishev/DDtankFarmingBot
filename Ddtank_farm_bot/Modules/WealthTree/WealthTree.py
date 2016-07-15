@@ -1,9 +1,16 @@
+"""
+Name of event : Wealth Tree
+Location : F gameplay -> Tree icon
+Image Recogniton Used : True
+"""
+
+
 import logging
 import time
 
 
-"""from Framework import Util, Imging, Clicking, Items, UI
-from Framework.Logic import FarmAction"""
+from Framework import Util, Imging, Clicking, Items, UI
+from Framework.Logic import FarmAction
 
 MODULE_NAME = 'WealthTree'
 MAGIC_FRUIT = (352, 204)

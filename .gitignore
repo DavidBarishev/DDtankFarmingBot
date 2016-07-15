@@ -3,4 +3,11 @@
 Ddtank_farm_bot/Captures/
 Ddtank_farm_bot/Logs/
 /Ddtank_farm_bot/Config.json
-docs/
+
+docs/source/_*
+
+docs/build/
+docs/make.bat
+docs/makefile
+
+*.sub*

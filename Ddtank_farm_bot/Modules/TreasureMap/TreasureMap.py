@@ -1,8 +1,15 @@
+"""
+Name of event : Treasure Map
+Location : in the bottom of the screen ,map icon.
+Image Recognition Used : True
+
+"""
+
 import logging
 from time import sleep
 
-"""from Framework import Util, Imging, Clicking
-from Framework.Logic import FarmAction"""
+from Framework import Util, Imging, Clicking
+from Framework.Logic import FarmAction
 
 TREASURE_MAP_POS = (812, 566)
 THROW_POS = (763, 561)

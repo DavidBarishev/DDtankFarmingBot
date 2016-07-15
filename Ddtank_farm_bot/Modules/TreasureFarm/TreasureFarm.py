@@ -1,9 +1,17 @@
+"""
+This farming modules farm the treasure farm located at the farm
+Name of event: Treasure Farm
+Location: Farm in the right region of the square, 
+          Goto farm, treasure map icon in the top left area.
+Image Recognition Used : True
+"""
+
 import logging
 from time import sleep
 
-"""from Framework import Util, Imging, Clicking
+from Framework import Util, Imging, Clicking
 from Framework.Logic import FarmAction
-"""
+
 
 EXPLORE_POS = (577, 542)
 RIGHT = (958, 534)
@@ -21,7 +29,8 @@ class TreasureFarm(FarmAction):
 
     def is_available(self):
         self.log.debug('Checking amount of times left to seek treasure ')
-        stars = Imging.locate_in_game_screen(PATH + 'Smiley.png', locate_all=True)
+        stars = Imging.locate_in_game_screen(
+            PATH + 'Smiley.png', locate_all=True)
         self.log.info('Treasure available to seek : %d times', len(stars))
         self.stars = stars
 
