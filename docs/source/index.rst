@@ -11,6 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+Check out the github page `here
+<https://github.com/DavidBarishev/DDtankFarmingBot/>`_.
 
 
 Indices and tables
