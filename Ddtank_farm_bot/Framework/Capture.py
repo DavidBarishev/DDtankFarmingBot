@@ -1,11 +1,14 @@
+"""This modules is used to capture the screen
+"""
 import pyautogui
 import time
+
 from Framework import Globals
 
 PATH = './Captures/'
 
 
-def capture_area(area=Globals.GAME_REGION):
+def capture_area(area):
     """
     Captures area of the screen
 
@@ -40,7 +43,7 @@ def get_game_screen():
     Returns:
          Image : Image of screen area
     """
-    return capture_area()
+    return capture_area(area=Globals.GAME_REGION)
 
 
 def save_game_screen(filename=('full_snap_' + str(time.time()))):

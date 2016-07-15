@@ -1,3 +1,10 @@
+"""
+Name of event : Treasure Map
+Location : in the bottom of the screen ,map icon.
+Image Recognition Used : True
+
+"""
+
 import logging
 from time import sleep
 
@@ -14,34 +21,34 @@ class TreasureMap(FarmAction):
         self.log = logging.getLogger(__name__)
 
     def is_available(self):
-        # Enter the menu
-        self.log.debug('Clicking on treasure map')
-        Clicking.click_in_game_region_point(TREASURE_MAP_POS)
-        sleep(1)
-
         self.log.debug('Checking for free throws')
         free_throw = free_throws()
         self.log.debug('Free throws found : %r', free_throw)
 
-        Util.click_back_button()
-        sleep(1)
         return free_throw
 
     def run(self):
-        # Enter the menu
-        self.log.debug('Clicking on treasure map')
-        Clicking.click_in_game_region_point(TREASURE_MAP_POS)
-
         self.log.debug('Checking for free throws')
         while free_throws():
             self.log.info('Free throw is available - throwing')
-            sleep(6)
+            sleep(10)
             Clicking.click_in_game_region_point(THROW_POS)
 
         sleep(1)
-        Util.click_back_button()
         # TODO add support for quests
         # TODO add support for completing level
+
+    def get_to_event(self):
+        self.log.debug('Clicking on treasure map')
+        Clicking.click_in_game_region_point(TREASURE_MAP_POS)
+        sleep(6)
+        pass
+
+
+    def exit_event(self):
+        Util.click_back_button()
+        sleep(1)
+        pass
 
 
 def free_throws():

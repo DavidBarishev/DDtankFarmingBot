@@ -1,9 +1,10 @@
-from Framework import Globals
+"""This module is used to click on the screen"""
+
+from Framework import Globals, UI
 import pyautogui
 import logging
 
 log = logging.getLogger(__name__)
-
 
 def click(x, y):
     """
@@ -15,6 +16,7 @@ def click(x, y):
     """
     log.debug("Clicking at (%d,%d)", x, y)
     pyautogui.click(x, y)
+    UI.move_mouse_out_of_game_screen()
 
 
 def click_point(point):
@@ -48,6 +50,5 @@ def click_in_game_region_point(point):
     click_in_game_region(point[0], point[1])
 
 
-
-
-
+def move(x, y, duration=0.0):
+    pyautogui.moveTo(x=x, y=y, duration=duration)

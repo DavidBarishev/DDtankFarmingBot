@@ -1,22 +1,28 @@
-import logging
-import time
-import os
-from datetime import datetime
 import json
+import logging
+import os
+import time
 
+from datetime import datetime
 from importlib import import_module
 
-from Framework import Globals
-from Framework import Util
-from Framework import Imging
-from Framework import Logic
 from Framework import Exceptions
+from Framework import Globals
+from Framework import Imging
+from Framework import Util
 
 
-def locate_globals():
+def locate_globals(config):
     """
         Located the global variables for later use
     """
+
+    Globals.X_GAME = config['Screen']['GamePoint'][0]
+    Globals.Y_GAME = config['Screen']['GamePoint'][1]
+
+    Globals.GAME_REGION = (Globals.X_GAME, Globals.Y_GAME,
+                           Globals.GAME_WIDTH, Globals.GAME_HEIGHT)
+
     # F Gamplay
     log.debug("Trying to find F Game Play Position")
 
@@ -41,25 +47,25 @@ def locate_globals():
         log.debug("Located Event at : %s", Globals.event_pos)
 
 
-def import_modules():
+def import_modules(config):
     """
     Imports all the modules dynamicly from /Modules and checks form.
     Returns:
         List: List of all imported modules , instantiated
     """
-    config = get_configuration()
     modules = []
     for module_name in os.listdir('./Modules'):
 
         if '.py' in module_name:
             continue
-        if config[module_name] == 'False':
+        if config['Modules'][module_name] == 'False':
             log.debug('Not importing %s, disabled in the config', module_name)
             continue
 
         log.info('Importing module : %s', module_name)
         try:
-            module_imported = import_module('Modules.' + module_name + '.' + module_name)
+            module_imported = import_module(
+                'Modules.' + module_name + '.' + module_name)
             modules.append(getattr(module_imported, module_name)())
         except ImportError:
             log.error('Module %s cannot be imported, check the docs for the proper format', module_name)
@@ -80,10 +86,33 @@ def get_configuration():
             else:
                 config[module_name] = 'True'
 
-        with open('Config.json', 'w') as outputfile:
-            json.dump(config, outputfile, sort_keys=True, indent=4, ensure_ascii=False)
+        # Game pos
+        pos = None
+        i = 0
+        while pos is None and i < 4:
+            log.info('Couldnt find game screen , retrying... ')
+            pos = Imging.locate_on_screen(Util.image_path_main('LockChat'))
+            i += 1
 
-        return json.dumps(config)
+        if pos is None:
+            log.critical('Couldnt find game screen , exiting')
+            raise Exceptions.GlobalNotFoundException
+
+        game_point_pos = (pos[0] - 16, pos[1] - 453)
+
+        json_f = {
+            "Modules": config,
+            "Screen":
+            {
+                "GamePoint": game_point_pos,
+            }
+        }
+
+        with open('Config.json', 'w') as outputfile:
+            json.dump(json_f, outputfile, sort_keys=True,
+                      indent=4, ensure_ascii=False)
+
+        return json_f
 
     else:
         with open('Config.json') as data_file:
@@ -100,14 +129,25 @@ def run_modules(modules):
     """
     for module in modules:
         module_name = Util.get_module_name(str(module))
-        if not isinstance(module, Logic.FarmAction):
+        # TODO change back to farm action
+        if not isinstance(module, object):
             log.error('%s is not FarmAction instance, check the docs for the proper format', module_name)
         else:
+            log.debug('Going to event - %s ', module_name)
+            module.get_to_event()
+
             log.info('Checking availability - %s', module_name)
             if module.is_available():
                 log.info('%s is available , executing', module_name)
                 time.sleep(1)
                 module.run()
+
+            log.debug('Existing Event - %s ', module_name)
+            module.exit_event()
+
+            log.debug('After run Event - %s ', module_name)
+            time.sleep(2)
+            module.after_run()
 
 
 def run_bot():
@@ -115,8 +155,9 @@ def run_bot():
 
     log.info("Locating Globals")
     try:
-        #locate_globals()
-        run_modules(import_modules())
+        config = get_configuration()
+        locate_globals(config)
+        run_modules(import_modules(config))
 
         log.info('Done')
     except Exceptions.GlobalNotFoundException:
@@ -124,42 +165,21 @@ def run_bot():
 
 
 def make_directories():
-    #if 'log' in globals():
-    print 'Checking if Logs folder exists'
     if not os.path.exists('Logs'):
-        print 'Log folder doesnt exists , making it'
         os.makedirs('Logs')
-    else:
-        print 'Log folder exists'
 
-    print 'Checking if Captures folder exists'
     if not os.path.exists('Captures'):
-        print 'Log Captures doesnt exists , making it'
         os.makedirs('Captures')
-    else:
-        print 'Captures folder exists'
-    """else:
-        log.debug('Checking if Logs folder exists')
-        if not os.path.exists('Logs'):
-            log.debug('Log folder doesnt exists , making it')
-            os.makedirs('Logs')
-        else:
-            log.debug('Log folder exists')
 
-        log.debug('Checking if Captures folder exists')
-        if not os.path.exists('Captures'):
-            log.debug('Log Captures doesnt exists , making it')
-            os.makedirs('Captures')
-        else:
-            log.debug('Captures folder exists')
-    """
 
 def setup_logger():
-    logging.basicConfig(filename='./Logs/' + datetime.now().strftime('%Y-%m-%d %H-%M-%S') + '.log',
-                        filemode='w',
-                        format='%(asctime)s,%(msecs)d - %(name)s.%(funcName)s() - %(levelname)s - %(message)s',
-                        datefmt='%H:%M:%S',
-                        level=logging.DEBUG)
+    # File
+    logging.basicConfig(
+        filename='./Logs/' + datetime.now().strftime('%Y-%m-%d %H-%M-%S') + '.log',
+        filemode='w',
+        format='%(asctime)s,%(msecs)d | %(name)s.%(funcName)s() | %(levelname)s | %(message)s',
+        datefmt='%H:%M:%S',
+        level=logging.DEBUG)
 
     global log
     log = logging.getLogger(__name__)
@@ -167,7 +187,7 @@ def setup_logger():
     # Add logging above info to console
     console = logging.StreamHandler()
     console.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(levelname)-8s %(message)s')
+    formatter = logging.Formatter('%(levelname)-8s | %(message)s')
     console.setFormatter(formatter)
 
     logging.getLogger('').addHandler(console)
