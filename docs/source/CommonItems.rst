@@ -1,4 +1,4 @@
-Ddtank_farm_bot.Framework.CommonItems module
+CommonItems module
 --------------------------------------------
 
 .. automodule:: Ddtank_farm_bot.Framework.CommonItems

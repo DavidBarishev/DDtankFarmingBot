@@ -1,4 +1,4 @@
-Ddtank_farm_bot.Framework.Imging module
+Imging module
 ---------------------------------------
 
 .. automodule:: Ddtank_farm_bot.Framework.Imging

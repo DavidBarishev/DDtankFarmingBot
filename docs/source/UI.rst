@@ -1,4 +1,4 @@
-Ddtank_farm_bot.Framework.UI module
+UI module
 -----------------------------------
 
 .. automodule:: Ddtank_farm_bot.Framework.UI

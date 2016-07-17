@@ -1,4 +1,4 @@
-Ddtank_farm_bot.Framework.Globals module
+Globals module
 ----------------------------------------
 
 .. automodule:: Ddtank_farm_bot.Framework.Globals

@@ -1,4 +1,4 @@
-Ddtank_farm_bot.Framework.Logic module
+Logic module
 --------------------------------------
 
 .. automodule:: Ddtank_farm_bot.Framework.Logic

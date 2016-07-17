@@ -1,4 +1,4 @@
-Ddtank_farm_bot.Framework.Clicking module
+Clicking module
 -----------------------------------------
 
 .. automodule:: Ddtank_farm_bot.Framework.Clicking

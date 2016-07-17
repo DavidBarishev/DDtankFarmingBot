@@ -1,4 +1,4 @@
-Ddtank_farm_bot.Framework.Exceptions module
+Exceptions module
 -------------------------------------------
 
 .. automodule:: Ddtank_farm_bot.Framework.Exceptions

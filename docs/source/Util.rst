@@ -1,5 +1,4 @@
-
-Ddtank_farm_bot.Framework.Util module
+Util module
 -------------------------------------
 
 .. automodule:: Ddtank_farm_bot.Framework.Util
