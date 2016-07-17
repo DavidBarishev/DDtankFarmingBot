@@ -44,8 +44,6 @@ def locate(img_file):
     else:
         return None
 
-# Inventory.InventorySections.Items
-
 
 def run_function_on_item(item_img, function, index_of_function, section=0):
     """Uses function on item
@@ -122,12 +120,12 @@ def run_function_on_multiple_items(items):
     Args:
         items (dict): Item dict , that represent the item , and the function.
         The proper form is :
-        {
+        "{
             "item_img": Path to image , (Use Util.image_path_main or Util.image_path_module),
             "function": Items.ItemFunctions.* Function to execute,
             "index_of_function": index of function in the context menu ,
             "section": Inventory.InventorySections.* Section of the inventory the item is in
-        }
+        }"
     """
     current_section = items[0]['section']
     Inventory.go_to_inventory(current_section)
