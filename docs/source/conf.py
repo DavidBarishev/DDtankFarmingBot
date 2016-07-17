@@ -18,7 +18,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../Ddtank_farm_bot/Framework'))
+sys.path.insert(0, os.path.abspath('../../Ddtank_farm_bot'))
 
 # -- General configuration ------------------------------------------------
 
