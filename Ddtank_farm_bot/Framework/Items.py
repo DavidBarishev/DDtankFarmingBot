@@ -118,8 +118,10 @@ def run_function_on_multiple_items(items):
     """Runs function per item , for multiple items 
 
     Args:
-        items (dict): Item dict , that represent the item , and the function.
-        The proper form is::
+        items (dict): Item dict , that represent the item , and the function to execute on that item.
+        
+    Note:
+    - The proper form is::
         {
             "item_img": Path to image , (Use Util.image_path_main or Util.image_path_module),
             "function": Items.ItemFunctions.* Function to execute,

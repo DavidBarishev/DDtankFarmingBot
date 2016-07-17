@@ -1,3 +1,15 @@
+"""Global variables used for the whole app
+
+Attributes:
+    event_pos (tuple): Description
+    f_gameplay_pos (tuple): Description
+    GAME_HEIGHT (int): Game height in pixels
+    GAME_WIDTH (int): Game width in pixels
+    X_GAME (int): Top left corner of game, x coordinate
+    Y_GAME (int): Top left corner of game, y coordinate
+    GAME_REGION (tuple): (x,y,width,height) of screen
+"""
+
 import logging
 
 try:
@@ -10,17 +22,7 @@ import Util
 
 log = logging.getLogger(__name__)
 
-"""Global variables used for the whole app
 
-Attributes:
-	event_pos (tuple): Description
-	f_gameplay_pos (tuple): Description
-	GAME_HEIGHT (int): Game height in pixels
-	GAME_WIDTH (int): Game width in pixels
-	X_GAME (int): Top left corner of game, x coordinate
-	Y_GAME (int): Top left corner of game, y coordinate
-	GAME_REGION (tuple): (x,y,width,height) of screen
-"""
 GAME_WIDTH = 999
 GAME_HEIGHT = 599
 
