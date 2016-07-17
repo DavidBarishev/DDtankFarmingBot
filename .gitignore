@@ -2,7 +2,6 @@
 .idea/
 Ddtank_farm_bot/Captures/
 Ddtank_farm_bot/Logs/
-/Ddtank_farm_bot/Config.json
 
 docs/source/_*
 
@@ -11,3 +10,5 @@ docs/make.bat
 docs/makefile
 
 *.sub*
+
+conf.py

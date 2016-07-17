@@ -7,7 +7,8 @@ Attributes:
     exp_3 (dict): Exp pill lv 3
     exp_4 (dict): Exp pill lv 4
 """
-from Framework import Items, Inventory
+import Items
+import Inventory
 from Util import image_path_main
 
 
