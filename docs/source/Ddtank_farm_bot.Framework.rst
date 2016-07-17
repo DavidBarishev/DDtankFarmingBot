@@ -34,7 +34,6 @@ Ddtank_farm_bot.Framework.Exceptions module
 .. automodule:: Ddtank_farm_bot.Framework.Exceptions
     :members:
     :undoc-members:
-    :show-inheritance:
 
 Ddtank_farm_bot.Framework.Globals module
 ----------------------------------------
@@ -57,16 +56,12 @@ Ddtank_farm_bot.Framework.Inventory module
 
 .. automodule:: Ddtank_farm_bot.Framework.Inventory
     :members:
-    :undoc-members:
-    :show-inheritance:
 
 Ddtank_farm_bot.Framework.Items module
 --------------------------------------
 
 .. automodule:: Ddtank_farm_bot.Framework.Items
     :members:
-    :undoc-members:
-    :show-inheritance:
 
 Ddtank_farm_bot.Framework.Logic module
 --------------------------------------

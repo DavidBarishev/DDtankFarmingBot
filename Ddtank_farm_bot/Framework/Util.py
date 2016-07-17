@@ -29,9 +29,9 @@ def image_path_main(img_name):
 def image_path_module(img_name, module_name):
     """Added path to image name from the one of the modules images folder
 
-    Args:
-        img_name (TYPE): the image name without .something (.png is used)  
-        module_name (TYPE): module folder name 
+    Args:s
+        img_name (str): the image name without .something (.png is used)
+        module_name (str): module folder name
 
     Returns:
         str: Path with the image name and .png
