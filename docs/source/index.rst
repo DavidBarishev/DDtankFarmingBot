@@ -10,6 +10,7 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
+   
    Capture.rst
    Clicking.rst
    CommonItems.rst
