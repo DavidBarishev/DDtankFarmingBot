@@ -1,7 +1,10 @@
 """This module handles Imaging related function used to find images on screen"""
 
 import pyautogui
-from Framework import Capture , Globals
+
+import Capture
+import Globals
+
 
 def locate(needle, haystack, locate_all=False, grayscale=False):
     """
@@ -68,5 +71,4 @@ def locate_in_game_screen(needle, locate_all=False, grayscale=False):
         Tuple: if found (x, y, width, height) of matching region , otherwise None
 
     """
-    return locate_with_region(needle=needle,region=Globals.GAME_REGION, locate_all=locate_all, grayscale=grayscale)
-
+    return locate_with_region(needle=needle, region=Globals.GAME_REGION, locate_all=locate_all, grayscale=grayscale)

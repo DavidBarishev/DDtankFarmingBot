@@ -4,9 +4,12 @@ import logging
 
 import pyautogui
 
-from Framework import Imging, Util, Globals
+import Imging
+import Util
+import Globals
 
 log = logging.getLogger(__name__)
+
 
 def click_exit_button():
     """Clicks red x button on screen, it locates the button"""

@@ -3,7 +3,7 @@
 import pyautogui
 import time
 
-from Framework import Globals
+import Globals
 
 PATH = './Captures/'
 

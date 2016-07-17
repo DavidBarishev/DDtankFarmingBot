@@ -1,17 +1,21 @@
 """Varise function used to interact with items"""
 from time import sleep
 
-from Framework import Clicking, Imging, Inventory, Util
+import Clicking
+import Imging
+import Inventory
+import Util
+
 
 class ItemFunctions(object):
     """Function that can be used on items 
     - Used like an enum
 
     Attributes:
-        Batch_Accept (int): Batch open max, with rewards 
-        Batch_Empty (int): Batch open max, without rewards 
-        Batch_Empty_Preferred (int): Batch open max, without rewards , if amount is 1 , will do Open_Empty instead 
-        Open_Accept (int): Open 1 with rewards 
+        Batch_Accept (int): Batch open max, with rewards
+        Batch_Empty (int): Batch open max, without rewards
+        Batch_Empty_Preferred (int): Batch open max, without rewards , if amount is 1 , will do Open_Empty instead
+        Open_Accept (int): Open 1 with rewards
         Open_Empty (int): Open 1 without rewards
     """
     Open_Empty = 1
@@ -40,7 +44,9 @@ def locate(img_file):
     else:
         return None
 
-#Inventory.InventorySections.Items
+# Inventory.InventorySections.Items
+
+
 def run_function_on_item(item_img, function, index_of_function, section=0):
     """Uses function on item
 
