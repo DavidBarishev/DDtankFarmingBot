@@ -1,7 +1,7 @@
 Capture module
 ----------------------------------------
 
-.. automodule:: Ddtank_farm_bot.Framework.Capture
+.. automodule:: Capture
     :members:
     :undoc-members:
     :show-inheritance:
