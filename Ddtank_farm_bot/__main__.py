@@ -8,6 +8,7 @@ from importlib import import_module
 
 from Framework.Globals import initGlobals
 
+
 def import_modules(config):
     """
     Imports all the modules dynamicly from /Modules and checks form.
@@ -45,6 +46,7 @@ def get_configuration():
     except (ImportError, AttributeError):
         log.critical('Config file not found or corrupted, please run the quick-start')
         sys.exit(0)
+
 
 def run_modules(modules):
     """
@@ -114,6 +116,7 @@ def setup_logger():
     console.setFormatter(formatter)
 
     logging.getLogger('').addHandler(console)
+
 
 def _get_module_name(str_o):
     return str_o.replace('<', '') \

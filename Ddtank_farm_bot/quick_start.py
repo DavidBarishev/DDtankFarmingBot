@@ -1,12 +1,9 @@
-import logging
 from time import sleep
 import os
+import sys
 
 from Framework import Imging
-from Framework import Exceptions
 from Framework import Util
-
-log = logging.getLogger(__name__)
 
 
 def quick_start():
@@ -27,14 +24,14 @@ def quick_start():
     pos = Imging.locate_on_screen(Util.image_path_main('LockChat'))
     i = 0
     while pos is None and i < 3:
-        log.info('Couldnt find game screen , retrying... ')
+        print 'Couldnt find game screen , retrying... '
         pos = Imging.locate_on_screen(Util.image_path_main('LockChat'))
         i += 1
         sleep(0.5)
 
     if pos is None:
-        log.critical('Couldnt find game screen , exiting')
-        raise Exceptions.GlobalNotFoundException
+        print 'Couldnt find game screen , exiting'
+        sys.exit(0)
 
     game_point_pos = (pos[0] - 16, pos[1] - 453)
 
