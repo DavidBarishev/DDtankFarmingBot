@@ -1,7 +1,7 @@
 """This module is used to click on the screen"""
 import logging
 
-import pyautogui
+#import pyautogui
 
 import Globals
 import UI

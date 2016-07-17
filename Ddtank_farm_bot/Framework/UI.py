@@ -2,7 +2,7 @@
 
 import logging
 
-import pyautogui
+#import pyautogui
 
 import Imging
 import Util

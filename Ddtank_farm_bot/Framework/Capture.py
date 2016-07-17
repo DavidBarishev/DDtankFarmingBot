@@ -1,6 +1,6 @@
 """This modules is used to capture the screen
 """
-import pyautogui
+#import pyautogui
 import time
 
 import Globals
