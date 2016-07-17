@@ -9,7 +9,7 @@ Welcome to DDtank Farming Bot Framework's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    Capture.rst
    Clicking.rst
    CommonItems.rst
