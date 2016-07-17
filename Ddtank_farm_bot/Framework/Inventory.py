@@ -2,7 +2,7 @@
 """
 from time import sleep
 
-from Framework import Clicking
+import Clicking
 
 
 class InventorySections(object):
