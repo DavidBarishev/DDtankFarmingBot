@@ -125,12 +125,12 @@ def run_function_on_multiple_items(items):
 
     Note:
         - The proper form is::
-            {
-                "item_img": Path to image, (Use Util.image_path_main or Util.image_path_module),
-                "function": Items.ItemFunctions, Function to execute,
-                "index_of_function": index of function in the context menu,
-                "section": Inventory.InventorySections, Section of the inventory the item is in
-            }
+        {
+            "item_img": Path to image, (Use Util.image_path_main or Util.image_path_module),
+            "function": Items.ItemFunctions, Function to execute,
+            "index_of_function": index of function in the context menu,
+            "section": Inventory.InventorySections, Section of the inventory the item is in
+        }
     """
     current_section = items[0]['section']
     Inventory.go_to_inventory(current_section)
