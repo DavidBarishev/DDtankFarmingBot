@@ -8,7 +8,7 @@ from importlib import import_module
 
 from Framework.Globals import initGlobals
 from Framework.Exceptions import GlobalNotFoundException
-
+from Framework.Logic import FarmAction
 
 def import_modules(config):
     """
@@ -22,7 +22,7 @@ def import_modules(config):
         if '.py' in module_name:
             continue
 
-        if config[module_name] == 'False':
+        if config[module_name] is False:
             log.debug('Not importing %s, disabled in the config', module_name)
             continue
 
@@ -62,7 +62,7 @@ def run_modules(modules):
     for module in modules:
         module_name = _get_module_name(str(module))
         # TODO change back to farm action
-        if not isinstance(module, object):
+        if not isinstance(module, FarmAction):
             log.error(
                 '%s is not FarmAction instance, check the docs for the proper format', module_name)
         else:

@@ -8,12 +8,11 @@ Image Recognition Used : True
 import logging
 from time import sleep
 
-from Framework import Util, Imging, Clicking
+from Framework import Util, Imging, Clicking, UI
 from Framework.Logic import FarmAction
 
 TREASURE_MAP_POS = (812, 566)
 THROW_POS = (763, 561)
-PATH = 'Modules/TreasureMap/Images/'
 
 
 class TreasureMap(FarmAction):
@@ -31,25 +30,34 @@ class TreasureMap(FarmAction):
         self.log.debug('Checking for free throws')
         while free_throws():
             self.log.info('Free throw is available - throwing')
-            sleep(10)
             Clicking.click_in_game_region_point(THROW_POS)
+            UI.move_mouse_out_of_game_screen()
+            sleep(10)
+            if complete_quest():
+                self.log.info('Landed one quest, exiting')
+                break
 
         sleep(1)
-        # TODO add support for quests
+        # TODO add support for beast gem
         # TODO add support for completing level
 
     def get_to_event(self):
         self.log.debug('Clicking on treasure map')
         Clicking.click_in_game_region_point(TREASURE_MAP_POS)
+        UI.move_mouse_out_of_game_screen()
         sleep(6)
-        pass
-
 
     def exit_event(self):
-        Util.click_back_button()
+        UI.click_back_button()
         sleep(1)
+
+    def after_run(self):
         pass
 
 
 def free_throws():
-    return Imging.locate_in_game_screen(PATH + 'FreeThrow.png') is not None
+    return Imging.locate_in_game_screen(Util.image_path_module('FreeThrow', 'TreasureMap')) is not None    
+
+
+def complete_quest():
+    return Imging.locate_in_game_screen(Util.image_path_module('CompleteNow', 'TreasureMap')) is None    
