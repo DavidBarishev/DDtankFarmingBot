@@ -9,13 +9,13 @@ Image Recognition Used : True
 import logging
 from time import sleep
 
-from Framework import Util, Imging, Clicking
+from Framework import Util, Imging, Clicking, UI
 from Framework.Logic import FarmAction
 
 
 EXPLORE_POS = (577, 542)
-RIGHT = (958, 534)
-FARM_POS = (500, 190)
+RIGHT = (999, 578)
+FARM_POS = (544, 181)
 TREASURE_POS = (34, 133)
 BACK_POS = (959, 566)
 PATH = 'Modules/TreasureFarm/Images/'
@@ -47,10 +47,10 @@ class TreasureFarm(FarmAction):
             sleep(10)
 
     def get_to_event(self):
-        self.log.debug('Moving Right')
-        for i in xrange(3):
+        for i in xrange(6):
+            self.log.debug('Moving Right')
             Clicking.click_in_game_region_point(RIGHT)
-            sleep(5)
+            sleep(5.5)
 
         self.log.debug('Entering Farm')
         Clicking.click_in_game_region_point(FARM_POS)
@@ -61,9 +61,12 @@ class TreasureFarm(FarmAction):
         sleep(7)
 
     def exit_event(self):
-        Util.click_back_button()
+        UI.click_back_button()
         sleep(7)
 
         self.log.debug('Clicking door')
         Clicking.click_in_game_region_point(BACK_POS)
         sleep(7)
+
+    def after_run(self):
+        pass

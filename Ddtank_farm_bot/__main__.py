@@ -111,7 +111,7 @@ def setup_logger():
     logging.basicConfig(
         filename='./Logs/' + datetime.now().strftime('%Y-%m-%d %H-%M-%S') + '.log',
         filemode='w',
-        format='%(asctime)s,%(msecs)d | %(name)s.%(funcName)s() | %(levelname)s | %(message)s',
+        format='%(asctime)s,%(msecs)-3d | %(levelname)-8s | %(name)s.%(funcName)s() | %(message)s',
         datefmt='%H:%M:%S',
         level=logging.DEBUG)
 

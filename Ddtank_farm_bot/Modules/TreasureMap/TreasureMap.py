@@ -34,7 +34,7 @@ class TreasureMap(FarmAction):
             UI.move_mouse_out_of_game_screen()
             sleep(10)
             if complete_quest():
-                self.log.info('Landed one quest, exiting')
+                self.log.info('Landed on quest, exiting')
                 break
 
         sleep(1)
