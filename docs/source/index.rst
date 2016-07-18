@@ -6,6 +6,11 @@
 Welcome to DDtank Farming Bot Framework's documentation!
 ==============================================
 
+You can find all the needed documentation to build your 'Farming modules' here.
+
+The actual farming bot documentation `here
+<https://github.com/DavidBarishev/DDtankFarmingBot/>`_.
+
 Contents:
 
 .. toctree::
@@ -25,8 +30,7 @@ Contents:
 
 
 
-Check out the github page `here
-<https://github.com/DavidBarishev/DDtankFarmingBot/>`_.
+
 
 
 Indices and tables
