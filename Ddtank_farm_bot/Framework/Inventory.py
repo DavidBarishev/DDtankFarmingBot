@@ -1,8 +1,11 @@
 """This module handles Inventory actions 
 """
 from time import sleep
+import logging
 
 import Clicking
+
+log = logging.getLogger(__name__)
 
 
 class InventorySections(object):
@@ -16,6 +19,13 @@ class InventorySections(object):
     Items = 1
 
 
+def convert(x):
+    return {
+        0: 'Equipment',
+        1: 'Items'
+    }[x]
+
+
 def go_to_inventory(section):
     """Enters inventory which the given section 
 
@@ -24,8 +34,9 @@ def go_to_inventory(section):
 
     """
     # Goto inventory
+    log.debug('Goint to inventory')
     Clicking.click_in_game_region_point((641, 572))
-    sleep(1)
+    sleep(2)
     go_to_section(section=section)
 
 
@@ -39,6 +50,7 @@ def go_to_section(section):
     Raises:
         NotImplementedError: If inventory section isn't part of InventorySections class 
     """
+    log.debug('Go to inventory section %s', convert(section))
     if section == InventorySections.Items:
         Clicking.click_in_game_region_point((891, 315))
         sleep(1)
@@ -53,6 +65,7 @@ def organize_inventory():
     """Organized the inventory, using the in-game button
     - Inventory should be open before the operation  
     """
+    log.debug('Organizing the inventory')
     Clicking.move(812, 483)
     sleep(1)
     Clicking.click_in_game_region_point((785, 453))
@@ -64,4 +77,5 @@ def exit_inventory():
     """Exists inventory
     - Inventory should be open before the operation  
     """
+    log.debug('Exiting inventory')
     Clicking.click_in_game_region_point((909, 43))

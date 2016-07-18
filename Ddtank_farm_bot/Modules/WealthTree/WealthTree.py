@@ -9,7 +9,7 @@ import logging
 import time
 
 
-from Framework import Util, Imging, Clicking, Items, UI
+from Framework import Util, Imging, Clicking, Items, UI, Inventory, CommonItems
 from Framework.Logic import FarmAction
 
 MODULE_NAME = 'WealthTree'
@@ -27,14 +27,18 @@ class WealthTree(FarmAction):
     def is_available(self):
         # Wealth Tree
         self.log.debug("Trying to find Wealth Tree Position")
-        self.wealth_tree_pos = Imging.locate_in_game_screen(Util.image_path_module('Tree',MODULE_NAME))
+        self.wealth_tree_pos = Imging.locate_in_game_screen(
+            Util.image_path_module('Tree', MODULE_NAME))
 
         if self.wealth_tree_pos is None:
-            self.log.info("Couldn't find wealth tree event , considering it as not live")
+            self.log.info(
+                "Couldn't find wealth tree event , considering it as not live")
             UI.reset_menus()
             return False
         else:
-            self.log.debug("Found Wealth Tree at : %s", str(self.wealth_tree_pos))
+            self.log.debug("Found Wealth Tree at : %s",
+                           str(self.wealth_tree_pos))
+            self.log.debug('Entering wealth tree')
             Clicking.click_in_game_region_point(self.wealth_tree_pos)
             time.sleep(2)
 
@@ -51,14 +55,13 @@ class WealthTree(FarmAction):
 
         self.log.debug("Clicking on Health Fruit")
         Clicking.click_in_game_region_point(HEALTH_FRUIT)
-        time.sleep(1)
+        time.sleep(1.5)
 
         self.log.debug("Clicking on Lucky Fruit")
         Clicking.click_in_game_region_point(LUCKY_FRUIT)
         time.sleep(2)
 
     def get_to_event(self):
-        self.log.debug("Clicking on F Gameplay")
         UI.click_f_gamplay()
         time.sleep(1)
 
@@ -71,5 +74,9 @@ class WealthTree(FarmAction):
             item_img=Util.image_path_module('LuckyFruit', MODULE_NAME),
             function=Items.ItemFunctions.Batch_Empty_Preferred,
             index_of_function=-1,
+            section=Inventory.InventorySections.Items
         )
 
+        Items.run_function_on_multiple_items(
+            [CommonItems.exp_1, CommonItems.exp_2, CommonItems.random_card]
+        )

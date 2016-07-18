@@ -7,6 +7,7 @@ from datetime import datetime
 from importlib import import_module
 
 from Framework.Globals import initGlobals
+from Framework.Exceptions import GlobalNotFoundException
 
 
 def import_modules(config):
@@ -31,9 +32,11 @@ def import_modules(config):
                 'Modules.' + module_name + '.' + module_name)
             modules.append(getattr(module_imported, module_name)())
         except ImportError:
-            log.error('Module %s cannot be imported, check the docs for the proper format', module_name)
+            log.error(
+                'Module %s cannot be imported, check the docs for the proper format', module_name)
         except TypeError:
-            log.error('Module %s cannot be instantiated, check the docs for the proper format', module_name)
+            log.error(
+                'Module %s cannot be instantiated, check the docs for the proper format', module_name)
     return modules
 
 
@@ -44,7 +47,8 @@ def get_configuration():
         return conf.Modules
 
     except (ImportError, AttributeError):
-        log.critical('Config file not found or corrupted, please run the quick-start')
+        log.critical(
+            'Config file not found or corrupted, please run the quick-start')
         sys.exit(0)
 
 
@@ -59,7 +63,8 @@ def run_modules(modules):
         module_name = _get_module_name(str(module))
         # TODO change back to farm action
         if not isinstance(module, object):
-            log.error('%s is not FarmAction instance, check the docs for the proper format', module_name)
+            log.error(
+                '%s is not FarmAction instance, check the docs for the proper format', module_name)
         else:
             log.debug('Going to event - %s ', module_name)
             module.get_to_event()
@@ -82,7 +87,11 @@ def run_bot():
     log.info("Starting The Program")
 
     log.info("Locating Globals")
-    initGlobals()
+    try:
+        initGlobals()
+    except GlobalNotFoundException:
+        sys.exit(0)
+
     config = get_configuration()
     run_modules(import_modules(config))
 

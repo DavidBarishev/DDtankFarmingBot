@@ -1,5 +1,6 @@
 import logging
 
+
 try:
     import conf
 except ImportError:
@@ -7,6 +8,7 @@ except ImportError:
 
 import Imging
 import Util
+import Exceptions
 
 log = logging.getLogger(__name__)
 
@@ -26,6 +28,7 @@ GAME_HEIGHT = 599
 
 
 def initGlobals():
+    log.debug('Getting game screen coordinates from conf')
     global GAME_REGION
     x, y = conf.Screen
     GAME_REGION = (x, y, GAME_WIDTH, GAME_HEIGHT)
@@ -53,6 +56,8 @@ def initGlobals():
 
     # Event
     global event_pos
+
+    log.debug("Trying to find event Position")
 
     tmp_e = Imging.locate_in_game_screen('Images/Event.png')
 

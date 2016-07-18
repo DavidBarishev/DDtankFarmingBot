@@ -30,6 +30,7 @@ def click_f_gamplay():
     - Should be on default screen
     """
     from Framework import Clicking
+    log.debug('Clicking on F gameplay')
     Clicking.click_in_game_region_point(Globals.f_gameplay_pos)
 
 
@@ -38,12 +39,14 @@ def click_event():
     - Should be on default screen
     """
     from Framework import Clicking
+    log.debug('Clicking on event ')
     Clicking.click_in_game_region_point(Globals.event_pos)
 
 
 def reset_menus():
     """Clicks in the top left , should reset all menu that wont require x button"""
     from Framework import Clicking
+    log.debug('reseting menues')
     Clicking.click_in_game_region_point((5, 5))
 
 
