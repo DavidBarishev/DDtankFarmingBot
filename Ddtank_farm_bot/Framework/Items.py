@@ -74,8 +74,8 @@ def run_function(item_img, function, index_of_function):
     """Runs function on item 
 
     Note:
-    - Inventory should be open
-    - Internal function, use run_function_on_item instead 
+        - Inventory should be open
+        - Internal function, use run_function_on_item instead 
 
     Args:
         item_img (str): file name of item's image
@@ -124,14 +124,13 @@ def run_function_on_multiple_items(items):
         items (dict): Item dict , that represent the item , and the function to execute on that item.
 
     Note:
-
-    - The proper form is::
-        {
-            "item_img": Path to image, (Use Util.image_path_main or Util.image_path_module),
-            "function": Items.ItemFunctions, Function to execute,
-            "index_of_function": index of function in the context menu,
-            "section": Inventory.InventorySections, Section of the inventory the item is in
-        }
+        - The proper form is::
+            {
+                "item_img": Path to image, (Use Util.image_path_main or Util.image_path_module),
+                "function": Items.ItemFunctions, Function to execute,
+                "index_of_function": index of function in the context menu,
+                "section": Inventory.InventorySections, Section of the inventory the item is in
+            }
     """
     current_section = items[0]['section']
     Inventory.go_to_inventory(current_section)
