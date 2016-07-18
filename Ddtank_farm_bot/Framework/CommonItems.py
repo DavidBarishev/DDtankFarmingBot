@@ -1,7 +1,7 @@
 """Has presets for common items, use this presets in Items.run_function_on_multiple_items()
 
 Attributes:
-    card (dict): Random card item
+    random_card (dict): Random card item
     exp_1 (dict): Exp pill lv 1
     exp_2 (dict): Exp pill lv 2
     exp_3 (dict): Exp pill lv 3
@@ -40,7 +40,7 @@ exp_4 = {
     "section": Inventory.InventorySections.Items
 }
 
-card = {
+random_card = {
     "item_img": image_path_main('Card'),
     "function": Items.ItemFunctions.Batch_Empty_Preferred,
     "index_of_function": 1,

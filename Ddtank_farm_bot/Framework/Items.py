@@ -15,19 +15,23 @@ class ItemFunctions(object):
     Attributes:
         Batch_Accept (int): Opens in batch the maximum amount , with rewards
         Batch_Empty (int): Opens in batch the maximum amount , without rewards
-        Batch_Empty_Preferred (int): Opens in batch the maximum amount, if the amount is 1, it will do Open_Empty instead
+        Batch_Empty_Preferred (int): Batch open max, without rewards , if amount is 1 , will do Open_Empty instead
         Open_Accept (int): Open 1 with rewards
         Open_Empty (int): Open 1 without rewards
+        Batch_Accept_Preferred (int): Batch open max, with rewards , if amount is 1 , will do Open_Empty instead
     """
     Open_Empty = 1
     Open_Accept = 2
     Batch_Empty = 3
     Batch_Accept = 4
     Batch_Empty_Preferred = 5
-
+    Batch_Accept_Preferred = 6
 
 def locate(img_file):
     """locates item in inventory 
+
+    Note:
+        - Internal function
 
     Args:
         img_file (str): full path to the image
