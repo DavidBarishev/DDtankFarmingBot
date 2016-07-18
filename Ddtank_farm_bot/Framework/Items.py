@@ -8,13 +8,14 @@ import Util
 
 
 class ItemFunctions(object):
-    """Function that can be used on items 
-    - Used like an enum
+    """Function that can be used on items
+    Note:
+        - Used like an enum
 
     Attributes:
-        Batch_Accept (int): Batch open max, with rewards
-        Batch_Empty (int): Batch open max, without rewards
-        Batch_Empty_Preferred (int): Batch open max, without rewards , if amount is 1 , will do Open_Empty instead
+        Batch_Accept (int): Opens in batch the maximum amount , with rewards
+        Batch_Empty (int): Opens in batch the maximum amount , without rewards
+        Batch_Empty_Preferred (int): Opens in batch the maximum amount, if the amount is 1, it will do Open_Empty instead
         Open_Accept (int): Open 1 with rewards
         Open_Empty (int): Open 1 without rewards
     """
@@ -29,7 +30,7 @@ def locate(img_file):
     """locates item in inventory 
 
     Args:
-        img_file (TYPE): Description
+        img_file (str): full path to the image
 
     Returns:
         Tuple: Position of the item (x,y), None if not found
@@ -71,6 +72,8 @@ def run_function_on_item(item_img, function, index_of_function, section=0):
 
 def run_function(item_img, function, index_of_function):
     """Runs function on item 
+
+    Note:
     - Inventory should be open
     - Internal function, use run_function_on_item instead 
 
@@ -119,14 +122,15 @@ def run_function_on_multiple_items(items):
 
     Args:
         items (dict): Item dict , that represent the item , and the function to execute on that item.
-        
+
     Note:
+
     - The proper form is::
         {
-            "item_img": Path to image , (Use Util.image_path_main or Util.image_path_module),
-            "function": Items.ItemFunctions.* Function to execute,
-            "index_of_function": index of function in the context menu ,
-            "section": Inventory.InventorySections.* Section of the inventory the item is in
+            "item_img": Path to image, (Use Util.image_path_main or Util.image_path_module),
+            "function": Items.ItemFunctions, Function to execute,
+            "index_of_function": index of function in the context menu,
+            "section": Inventory.InventorySections, Section of the inventory the item is in
         }
     """
     current_section = items[0]['section']
@@ -147,8 +151,10 @@ def run_function_on_multiple_items(items):
 
 def click_on_function(pos, index):
     """Clicks on function when the position of item is known 
-    - Internal function 
-    - The item should be clicked once 
+
+    Note:
+        - Internal function 
+        - The item should be already clicked once 
 
     Args:
         pos (tuple): (x,y) the position of the item

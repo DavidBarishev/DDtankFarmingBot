@@ -1,4 +1,4 @@
-"""Has presets for common items
+"""Has presets for common items, use this presets in Items.run_function_on_multiple_items()
 
 Attributes:
     card (dict): Random card item
